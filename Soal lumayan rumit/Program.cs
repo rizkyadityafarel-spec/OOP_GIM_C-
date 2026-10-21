@@ -1,9 +1,9 @@
 
 using System;
+
 namespace KerangkaGame
 {
     class Karakter
-
     {
         public string nama { get; private set; }
         public int kesehatan { get; private set; }
@@ -27,6 +27,7 @@ namespace KerangkaGame
             Console.WriteLine("===> Mulai Serangan");
             target.TerimaSerangan(this.senjata);
         }
+
         public void TerimaSerangan(int jumlahSerangan)
         {
             kesehatan -= jumlahSerangan;
@@ -44,6 +45,7 @@ namespace KerangkaGame
             if (pilihan == "yes")
             {
                 kesehatan += 20;
+
                 Console.WriteLine(
                     $"{nama} disembuhkan. Kesehatan sekarang {kesehatan}"
                 );
@@ -59,50 +61,73 @@ namespace KerangkaGame
                 Console.WriteLine("Pilihan tidak ada.");
             }
         }
-
-        public void Posisi() //method untuk perpindahan posisi karakter
+        public void Posisi()
         {
-            int posisiSekarang = 0;
+            Console.WriteLine("\n===> Perpindahan Posisi Karakter <===");
+            Console.WriteLine("Mana Yang Kamu Pilih ?");
+            Console.WriteLine("1. Perpindahan angka");
+            Console.WriteLine("2. Tombol Keyboard");
+            Console.Write("Pilihanmu: ");
 
-            Console.WriteLine("===> Perpindahan Posisi Karakter <===");
-            Console.WriteLine($"Karaktermu : {nama} / Kekuatan : {senjata} / Kesehatan : {kesehatan}");
-            Console.WriteLine($"Posisi saat ini : {posisiSekarang}");
+            string pilihan = Console.ReadLine();
 
-            while (true)
+            if (pilihan == "1")
             {
-            ConsoleKeyInfo tombol = Console.ReadKey(true);
-            if (tombol.Key == ConsoleKey.RightArrow)
-            {
-            posisiSekarang += 2;
+                Console.Write("Masukkan posisi awal: ");
+                posisiAwal = Convert.ToInt32(Console.ReadLine());
+                posisiSaatIni = posisiAwal;
+
+                Console.Write("Masukkan jumlah perpindahan: ");
+                int perpindahan = Convert.ToInt32(Console.ReadLine());
+                posisiSaatIni += perpindahan;
+
+                Console.WriteLine($"{nama} berpindah posisi.");
+                Console.WriteLine($"Posisi awal: {posisiAwal}");
+                Console.WriteLine($"Posisi saat ini: {posisiSaatIni}");
             }
-            else if (tombol.Key == ConsoleKey.LeftArrow)
+            else if (pilihan == "2")
             {
-            posisiSekarang -= 1;
-            }
-            else if (tombol.Key == ConsoleKey.Escape)
-            {
-            Console.WriteLine("permainan Berhenti");
-            break;
+                Console.WriteLine(
+                    $"\nKaraktermu: {nama} / Kekuatan: {senjata} / Kesehatan: {kesehatan}"
+                );
+
+                Console.WriteLine($"Posisi saat ini: {posisiSaatIni}");
+                Console.WriteLine("Panah kanan = maju 2 langkah");
+                Console.WriteLine("Panah kiri = mundur 1 langkah");
+                Console.WriteLine("ESC = berhenti");
+
+                while (true)
+                {
+                    ConsoleKeyInfo tombol = Console.ReadKey(true);
+
+                    if (tombol.Key == ConsoleKey.RightArrow)
+                    {
+                        posisiSaatIni += 2;
+                    }
+                    else if (tombol.Key == ConsoleKey.LeftArrow)
+                    {
+                        posisiSaatIni -= 1;
+                    }
+                    else if (tombol.Key == ConsoleKey.Escape)
+                    {
+                        Console.WriteLine("\nPermainan berhenti.");
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    Console.WriteLine(
+                        $"Posisi saat ini: {posisiSaatIni}"
+                    );
+                }
             }
             else
             {
-            continue;
+                Console.WriteLine("Pilihan tidak tersedia!");
             }
-            Console.WriteLine($"Posisi saat ini : {posisiSekarang}"); 
-            }
-            }
-
-        //public void Aksi()
-        //{
-        //    Console.Write("Masukkan posisi awal: ");
-        //    posisiAwal = Convert.ToInt32(Console.ReadLine());
-        //    Console.Write("Masukkan posisi saat ini: ");
-
-        //    posisiSaatIni = Convert.ToInt32(Console.ReadLine());
-        //    Console.WriteLine($"{nama} berpindah posisi.");
-        //    Console.WriteLine($"Posisi awal: {posisiAwal}");
-        //    Console.WriteLine($"Posisi saat ini: {posisiSaatIni}");
-        //}
+        }
     }
 
     class MainProgram
