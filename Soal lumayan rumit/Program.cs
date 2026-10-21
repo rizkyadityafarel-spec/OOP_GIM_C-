@@ -60,17 +60,49 @@ namespace KerangkaGame
             }
         }
 
-        public void Aksi()
+        public void Posisi() //method untuk perpindahan posisi karakter
         {
-            Console.Write("Masukkan posisi awal: ");
-            posisiAwal = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Masukkan posisi saat ini: ");
+            int posisiSekarang = 0;
 
-            posisiSaatIni = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"{nama} berpindah posisi.");
-            Console.WriteLine($"Posisi awal: {posisiAwal}");
-            Console.WriteLine($"Posisi saat ini: {posisiSaatIni}");
-        }
+            Console.WriteLine("===> Perpindahan Posisi Karakter <===");
+            Console.WriteLine($"Karaktermu : {nama} / Kekuatan : {senjata} / Kesehatan : {kesehatan}");
+            Console.WriteLine($"Posisi saat ini : {posisiSekarang}");
+
+            while (true)
+            {
+            ConsoleKeyInfo tombol = Console.ReadKey(true);
+            if (tombol.Key == ConsoleKey.RightArrow)
+            {
+            posisiSekarang += 2;
+            }
+            else if (tombol.Key == ConsoleKey.LeftArrow)
+            {
+            posisiSekarang -= 1;
+            }
+            else if (tombol.Key == ConsoleKey.Escape)
+            {
+            Console.WriteLine("permainan Berhenti");
+            break;
+            }
+            else
+            {
+            continue;
+            }
+            Console.WriteLine($"Posisi saat ini : {posisiSekarang}"); 
+            }
+            }
+
+        //public void Aksi()
+        //{
+        //    Console.Write("Masukkan posisi awal: ");
+        //    posisiAwal = Convert.ToInt32(Console.ReadLine());
+        //    Console.Write("Masukkan posisi saat ini: ");
+
+        //    posisiSaatIni = Convert.ToInt32(Console.ReadLine());
+        //    Console.WriteLine($"{nama} berpindah posisi.");
+        //    Console.WriteLine($"Posisi awal: {posisiAwal}");
+        //    Console.WriteLine($"Posisi saat ini: {posisiSaatIni}");
+        //}
     }
 
     class MainProgram
@@ -84,7 +116,7 @@ namespace KerangkaGame
 
             musuh.Healing();
 
-            player1.Aksi();
+            player1.Posisi();
         }
     }
 }
